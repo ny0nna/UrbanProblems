@@ -7,6 +7,7 @@ use app\models\ClaimSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ClaimController implements the CRUD actions for Claim model.
@@ -70,7 +71,14 @@ class ClaimController extends Controller
         $model = new Claim();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $model->load($this->request->post());
+
+            $model->photo_before= UploadedFile::getInstance($model,'photo_before');
+            $file_name='/Images/' . \Yii::$app->getSecurity()->generateRandomString(50). '.' . $model->photo_before->extension;
+            $model->photo_before->saveAs(\Yii::$app->basePath . $file_name);
+            $model->photo_before=$file_name;
+
+            if ($model->save(false)) {
                 return $this->redirect(['view', 'id_claim' => $model->id_claim]);
             }
         } else {
@@ -93,14 +101,31 @@ class ClaimController extends Controller
     {
         $model = $this->findModel($id_claim);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_claim' => $model->id_claim]);
+        if ($this->request->isPost) {
+            $model->load($this->request->post());
+
+            $model->photo_before= UploadedFile::getInstance($model,'photo_before');
+            $file_name='/Images/' . \Yii::$app->getSecurity()->generateRandomString(50). '.' . $model->photo_before->extension;
+            $model->photo_before->saveAs(\Yii::$app->basePath . $file_name);
+            $model->photo_before=$file_name;
+
+            $model->photo_after= UploadedFile::getInstance($model,'photo_after');
+            $file_name='/Images/' . \Yii::$app->getSecurity()->generateRandomString(50). '.' . $model->photo_after->extension;
+            $model->photo_after->saveAs(\Yii::$app->basePath . $file_name);
+            $model->photo_after=$file_name;
+
+            if ($model->save(false)) {
+                return $this->redirect(['view', 'id_claim' => $model->id_claim]);
+            }
+        } else {
+            $model->loadDefaultValues();
         }
 
-        return $this->render('update', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
+    
 
     /**
      * Deletes an existing Claim model.
@@ -131,4 +156,5 @@ class ClaimController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

@@ -12,6 +12,8 @@ use yii\grid\GridView;
 
 $this->title = 'Заявки';
 $this->params['breadcrumbs'][] = $this->title;
+
+$id_user=Yii::$app->user->id;
 ?>
 <div class="claim-index">
 
@@ -30,21 +32,28 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id_claim',
-            //'id_user',
+            ['attribute'=>'id_user', 'value'=> function($data){return
+                $data->getUser()->One()->name;}],
             'name',
             'discr',
             ['attribute'=>'Категория', 'value'=> function($data){return
-                $data->getCat()->One()->cat;}],
-            'photo_after',
-            'photo_before',
+                $data->getCat()->One()->name;}],
+            
+            ['attribute'=>'Фото (до)', 'format'=>'html',
+'value'=>function($data){return" <img src='{$data->photo_before}' alt=''
+style='width: 70px;'>";}],
+
+['attribute'=>'Фото (после)', 'format'=>'html',
+            'value'=>function($data){return" <img src='{$data->photo_after}' alt=''
+            style='width: 70px;'>";}],
             //'time',
-            'ststus',
-           /* [
+            'status',
+           [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Claim $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id_claim' => $model->id_claim]);
                  }
-            ],*/
+            ],
         ],
     ]); ?>
 

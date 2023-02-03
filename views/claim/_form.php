@@ -10,25 +10,31 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="claim-form">
+ <?php $li=['prompt' => '']; $categories=\app\models\Category::find()->all();
+    foreach ($categories as $category)
+    {
+        $li[$category->id_cat]=$category->name;
+    }?>
+<?php $form = ActiveForm::begin();?>
+   
 
-    <?php $form = ActiveForm::begin(); ?>
 
- 
+   <?= $form->field($model, 'id_user')->textInput() ?>
+    
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'discr')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_cat')->dropDownList([]) ?>
+    <?= $form->field($model, 'id_cat')->dropDownList($li) ?>
     
     <br>
-    <?= $form->field($model, 'photo_before')->fileInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'photo_before')->fileInput() ?>
 <br>
-    <?= $form->field($model, 'photo_after')->fileInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'photo_after')->fileInput() ?>
 <br>
-    <?= $form->field($model, 'time')->textInput() ?>
 
-    <?= $form->field($model, 'ststus')->dropDownList([ 'Новая' => 'Новая', 'Решена' => 'Решена', 'Отклонена' => 'Отклонена', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решена' => 'Решена', 'Отклонена' => 'Отклонена', ], ['prompt' => '']) ?>
 <br>
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

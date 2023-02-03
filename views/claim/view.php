@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Claim $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Claims', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Заявки'];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id_claim' => $model->id_claim], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id_claim' => $model->id_claim], [
+        <?= Html::a('Обновить', ['update', 'id_claim' => $model->id_claim], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id_claim' => $model->id_claim], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -30,14 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id_claim',
-            'id_user',
+            //'id_user',
             'name',
             'discr',
-            'id_cat',
-            'photo_after',
-            'photo_before',
+            ['attribute'=>'Категория', 'value'=> function($data){return
+                $data->getCat()->One()->name;}],
+                ['attribute'=>'Фото (до)', 'format'=>'html',
+                'value'=>function($data){return" <img src='{$data->photo_before}' alt=''
+                style='width: 70px;'>";}],
+                
+                ['attribute'=>'Фото (после)', 'format'=>'html',
+                            'value'=>function($data){return" <img src='{$data->photo_after}' alt=''
+                            style='width: 70px;'>";}],
             'time',
-            'ststus',
+            'status',
         ],
     ]) ?>
 

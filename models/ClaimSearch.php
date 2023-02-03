@@ -18,7 +18,7 @@ class ClaimSearch extends Claim
     {
         return [
             [['id_claim', 'id_user', 'id_cat'], 'integer'],
-            [['name', 'discr', 'photo_after', 'photo_before', 'time', 'ststus'], 'safe'],
+            [['name', 'discr', 'photo_after', 'photo_before', 'time', 'status'], 'safe'],
         ];
     }
 
@@ -68,7 +68,7 @@ class ClaimSearch extends Claim
             ->andFilterWhere(['like', 'discr', $this->discr])
             ->andFilterWhere(['like', 'photo_after', $this->photo_after])
             ->andFilterWhere(['like', 'photo_before', $this->photo_before])
-            ->andFilterWhere(['like', 'ststus', $this->ststus]);
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

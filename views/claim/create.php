@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var app\models\Claim $model */
 
 $this->title = 'Создание заявки';
-$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Заявки'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="claim-create">

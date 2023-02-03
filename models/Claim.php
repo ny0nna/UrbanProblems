@@ -36,7 +36,7 @@ class Claim extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_user', 'name', 'discr', 'id_cat', 'photo_after', 'photo_before'], 'required'],
+            [[ 'name', 'discr', 'id_cat', 'photo_before'], 'required'],
             [['id_user', 'id_cat'], 'integer'],
             [['time'], 'safe'],
             [['ststus'], 'string'],
@@ -54,14 +54,14 @@ class Claim extends \yii\db\ActiveRecord
     {
         return [
             'id_claim' => 'Номер заявки',
-            'id_user' => 'Id User',
+            'id_user' => 'Пользователь',
             'name' => 'Наименование',
             'discr' => 'Описание',
             'id_cat' => 'Категория',
             'photo_after' => 'Фото (после)',
             'photo_before' => 'Фото (до)',
             'time' => 'Время',
-            'ststus' => 'Статус',
+            'status' => 'Статус',
         ];
     }
 
