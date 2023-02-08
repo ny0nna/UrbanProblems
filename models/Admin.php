@@ -14,7 +14,7 @@ class Admin extends \yii\base\BaseObject implements IdentityInterface
         '100' => [
             'id' => '100',
             'username' => 'admin',
-            'password' => 'admin',
+            'password' => 'adminWSR',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
         ],

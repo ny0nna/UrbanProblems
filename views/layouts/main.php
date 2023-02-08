@@ -46,9 +46,8 @@ else {
     Yii::$app->user->identity->is_admin==1 ?
         ( $items=[
             ['label' => 'Главная', 'url' => ['/site/about']],
+            ['label' => 'Панель администратора', 'url' => ['/admin/index']],
             ['label' => 'Личный кабинет', 'url' => ['/user/view?id_user='.$id_user]],
-            ['label' => 'Просмотр заявок', 'url' => ['/claim/index']],
-            ['label' => 'Управление категориями', 'url' => ['/category/index']],
             ['label' => 'Где нас найти?', 'url' => ['/site/contact']],
         ])
         :

@@ -46,7 +46,7 @@ style='width: 70px;'>";}],
 ['attribute'=>'Фото (после)', 'format'=>'html',
             'value'=>function($data){return" <img src='{$data->photo_after}' alt=''
             style='width: 70px;'>";}],
-            //'time',
+            'time',
             'status',
            [
                 'class' => ActionColumn::className(),

@@ -71,9 +71,11 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -124,14 +126,14 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+
     }
 
    
-
     
     public function actionCount()
     {
-        $claims=Claim::find()->where(['status'=>'Решена'])->orderBy(['time'=>SORT_DESC])->limit(4)->all();
+        $claims=Claim::find()->where(['status'=>'Решена'])->orderBy(['time'=>SORT_DESC])->all();
         return Yii::$app->response->content = count($claims);
     }
 }

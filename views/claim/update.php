@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Claim $model */
 
-$this->title = 'Update Claim: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Claims', 'url' => ['index']];
+$this->title = 'Обновить' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Заявки'];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id_claim' => $model->id_claim]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="claim-update">
 

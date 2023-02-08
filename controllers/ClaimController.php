@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use Yii;
 
 /**
  * ClaimController implements the CRUD actions for Claim model.
@@ -69,11 +70,14 @@ class ClaimController extends Controller
     public function actionCreate()
     {
         $model = new Claim();
-
+        if (Yii::$app->user->isGuest){$this->redirect(['site/login']);}
+        else{$model->id_user = Yii::$app->user->identity->id_user;}
+        
+       
         if ($this->request->isPost) {
             $model->load($this->request->post());
 
-            $model->photo_before= UploadedFile::getInstance($model,'photo_before');
+            $model->photo_before=UploadedFile::getInstance($model,'photo_before');
             $file_name='/Images/' . \Yii::$app->getSecurity()->generateRandomString(50). '.' . $model->photo_before->extension;
             $model->photo_before->saveAs(\Yii::$app->basePath . $file_name);
             $model->photo_before=$file_name;
